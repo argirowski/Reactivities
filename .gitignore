@@ -1,0 +1,25 @@
+# Backend
+API/bin/
+API/obj/
+Application/bin/
+Application/obj/
+Domain/bin/
+Domain/obj/
+Persistence/bin/
+Persistence/obj/
+
+# Frontend
+reactivities-ui/node_modules/
+reactivities-ui/.env
+reactivities-ui/localhost.pem
+reactivities-ui/localhost-key.pem
+
+# Reactivities Folder
+.vs/
+
+# General
+*.user
+*.suo
+*.cache
+*.log
+.DS_Store
