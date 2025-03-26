@@ -10,7 +10,11 @@ import {
 } from "@mui/material";
 import { Group } from "@mui/icons-material";
 
-const NavBar = () => (
+type NavBarProps = {
+  handleOpenForm: () => void;
+};
+
+const NavBar = ({ handleOpenForm }: NavBarProps) => (
   <Fragment>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -59,7 +63,12 @@ const NavBar = () => (
                 Contact
               </MenuItem>
             </Box>
-            <Button size="large" variant="contained" color="warning">
+            <Button
+              size="large"
+              variant="contained"
+              color="warning"
+              onClick={handleOpenForm}
+            >
               Create Activity
             </Button>
           </Toolbar>

@@ -5,11 +5,13 @@ import ActivityCard from "../ActivityCard";
 type ActivityListProps = {
   activities: Activity[];
   handleSelectActivity: (id: string) => void;
+  handleDeleteActivity: (id: string) => void;
 };
 
 const ActivityList = ({
   activities,
   handleSelectActivity,
+  handleDeleteActivity,
 }: ActivityListProps) => {
   return (
     <Fragment>
@@ -19,6 +21,7 @@ const ActivityList = ({
             key={activity.id}
             activity={activity}
             handleSelectActivity={handleSelectActivity}
+            handleDeleteActivity={handleDeleteActivity}
           />
         ))}
       </Box>

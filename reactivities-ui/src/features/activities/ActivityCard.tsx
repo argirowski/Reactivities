@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -11,11 +12,13 @@ import { Fragment } from "react";
 type ActivityCardProps = {
   activity: Activity;
   handleSelectActivity: (id: string) => void;
+  handleDeleteActivity: (id: string) => void;
 };
 
 const ActivityCard = ({
   activity,
   handleSelectActivity,
+  handleDeleteActivity,
 }: ActivityCardProps) => {
   return (
     <Fragment>
@@ -34,13 +37,23 @@ const ActivityCard = ({
           sx={{ display: "flex", justifyContent: "space-between", pb: 2 }}
         >
           <Chip label={activity.category} variant="outlined" />
-          <Button
-            size="medium"
-            variant="contained"
-            onClick={() => handleSelectActivity(activity.id)}
-          >
-            View
-          </Button>
+          <Box sx={{ display: "flex", gap: 2 }}>
+            <Button
+              size="medium"
+              variant="contained"
+              onClick={() => handleSelectActivity(activity.id)}
+            >
+              View
+            </Button>
+            <Button
+              size="medium"
+              variant="contained"
+              onClick={() => handleDeleteActivity(activity.id)}
+              color="error"
+            >
+              Delete
+            </Button>
+          </Box>
         </CardActions>
       </Card>
     </Fragment>

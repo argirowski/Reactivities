@@ -1,4 +1,7 @@
-﻿using Domain;
+﻿using Application.DTO;
+using AutoMapper;
+using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -9,16 +12,20 @@ namespace Application.Activities.Commands
         // This is the command that will be used to create an activity
         public class Command : IRequest<string>
         {
-            public required Activity Activity { get; set; }
+            public required CreateActivityDTO CreateActivityDTO { get; set; }
         }
         // This is the command handler that will be used to handle the command
-        public class Handler(AppDbContext context) : IRequestHandler<Command, string>
+        public class Handler(AppDbContext context, IMapper mapper, IValidator<Command> validator) : IRequestHandler<Command, string>
         {
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-                context.Activities.Add(request.Activity);
+                await validator.ValidateAndThrowAsync(request, cancellationToken);
+
+                var activity = mapper.Map<Activity>(request.CreateActivityDTO);
+
+                context.Activities.Add(activity);
                 await context.SaveChangesAsync(cancellationToken);
-                return request.Activity.Id;
+                return activity.Id;
             }
         }
     }

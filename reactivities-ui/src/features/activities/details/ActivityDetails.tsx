@@ -11,11 +11,13 @@ import { Fragment } from "react";
 type ActivityDetailsProps = {
   activity: Activity;
   handleCancelSelectActivity: () => void;
+  handleOpenForm: (id: string) => void;
 };
 
 const ActivityDetails = ({
   activity,
   handleCancelSelectActivity,
+  handleOpenForm,
 }: ActivityDetailsProps) => {
   return (
     <Fragment>
@@ -32,7 +34,9 @@ const ActivityDetails = ({
           <Typography variant="body1">{activity.description}</Typography>
         </CardContent>
         <CardActions>
-          <Button color="primary">Edit</Button>
+          <Button color="primary" onClick={() => handleOpenForm(activity.id)}>
+            Edit
+          </Button>
           <Button color="inherit" onClick={handleCancelSelectActivity}>
             Cancel
           </Button>
