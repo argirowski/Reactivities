@@ -1,0 +1,36 @@
+🎯 Project Overview
+Title: Full-Stack Social Network Application with .NET Core, React, and MobX
+
+📌 Goal:
+Build a feature-rich social network application, akin to Meetup or Facebook, from scratch using .NET Core 9.0, React 19 with TypeScript, and MobX. The application will allow users to register, authenticate, and participate in events, emphasizing modern design patterns, scalable architecture, and real-time web communication.
+
+📌 Core Features & Highlights
+✅ Backend Development:
+🔹 Create a Web API using ASP.NET Core with Clean Architecture.
+🔹 Implement CQRS (Command Query Responsibility Segregation) with Mediator Pattern for maintainable and testable code.
+🔹 Utilize Entity Framework Core as the ORM for database interaction.
+🔹 Integrate SignalR for real-time web communication (e.g., chat features).
+🔹 Enable authentication with ASP.NET Core Identity.
+
+✅ Frontend Development:
+🔹 Build a client-side application using React 19 with TypeScript.
+🔹 Manage application state with MobX.
+🔹 Design a visually appealing UI using Material UI.
+🔹 Develop a custom photo upload widget with drag-and-drop functionality and image cropping.
+🔹 Incorporate React Router for navigation.
+🔹 Apply reusable form inputs and validation using React Hook Form and Zod.
+
+✅ Enhanced User Experience:
+🔹 Add login and registration features on the client side.
+🔹 Implement paging, sorting, and filtering for a seamless user experience
+
+✅ Deployment:
+🔹 Publish the application to Azure for public accessibility.
+
+💡 Learning Journey
+✔ Begin with setting up the development environment and creating a multi-project solution using .NET Core CLI and create-react-app.
+✔ Master advanced topics like:
+🔹 Using AutoMapper in backend services.
+🔹 Implementing authentication flows with ASP.NET Core Identity.
+🔹 Leveraging React Query for efficient data fetching and caching.
+✔ Build incrementally, learning a new concept in every module, from backend to frontend.

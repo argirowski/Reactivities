@@ -38,6 +38,7 @@ const NavBar = () => (
             <Box sx={{ display: "flex", gap: 1 }}>
               <MenuItemLink to="/activities">Activities</MenuItemLink>
               <MenuItemLink to="/add">Create Activity</MenuItemLink>
+              <MenuItemLink to="/errors">Errors</MenuItemLink>
             </Box>
             <MenuItem
               sx={{

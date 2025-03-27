@@ -11,13 +11,8 @@ const agent = axios.create({
 });
 
 agent.interceptors.response.use(async (response) => {
-  try {
-    await sleep(1000);
-    return response;
-  } catch (error) {
-    console.error(error);
-    return Promise.reject(error);
-  }
+  await sleep(1000);
+  return response;
 });
 
 export default agent;
