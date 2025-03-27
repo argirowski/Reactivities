@@ -46,12 +46,25 @@ const ActivityForm = () => {
           flexDirection="column"
           gap={3}
         >
-          <TextField label="Title" />
-          <TextField label="Description" multiline rows={3} />
-          <TextField label="Category" />
-          <TextField label="Date" type="date" />
-          <TextField label="City" />
-          <TextField label="Venue" />
+          <TextField label="Title" defaultValue={activity?.title} />
+          <TextField
+            label="Description"
+            multiline
+            rows={3}
+            defaultValue={activity?.description}
+          />
+          <TextField label="Category" defaultValue={activity?.category} />
+          <TextField
+            label="Date"
+            type="date"
+            defaultValue={
+              activity?.date
+                ? new Date(activity.date).toISOString().split("T")[0]
+                : new Date().toISOString().split("T")[0]
+            }
+          />
+          <TextField label="City" defaultValue={activity?.city} />
+          <TextField label="Venue" defaultValue={activity?.venue} />
           <Box display="flex" justifyContent="end" gap={3}>
             <Button color="inherit" onClick={() => console.log("Cancel")}>
               Cancel
@@ -60,7 +73,7 @@ const ActivityForm = () => {
               variant="contained"
               color="success"
               type="submit"
-              disabled={updateActivity.isPending}
+              disabled={updateActivity.isPending || createActivity.isPending}
             >
               Submit
             </Button>

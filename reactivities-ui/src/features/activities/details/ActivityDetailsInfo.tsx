@@ -1,0 +1,48 @@
+import { CalendarToday, Info, Place } from "@mui/icons-material";
+import { Divider, Grid2, Paper, Typography } from "@mui/material";
+import { Fragment } from "react";
+import { formattedDate } from "../../../lib/utils/utils";
+
+type ActivityDetailsInfoProps = {
+  activity: Activity;
+};
+
+const ActivityDetailsInfo = ({ activity }: ActivityDetailsInfoProps) => {
+  return (
+    <Fragment>
+      <Paper sx={{ mb: 2 }}>
+        <Grid2 container alignItems="center" pl={2} py={1}>
+          <Grid2 size={1}>
+            <Info color="info" fontSize="large" />
+          </Grid2>
+          <Grid2 size={11}>
+            <Typography>{activity.description}</Typography>
+          </Grid2>
+        </Grid2>
+        <Divider />
+        <Grid2 container alignItems="center" pl={2} py={1}>
+          <Grid2 size={1}>
+            <CalendarToday color="info" fontSize="large" />
+          </Grid2>
+          <Grid2 size={11}>
+            <Typography> {formattedDate(activity.date)}</Typography>
+          </Grid2>
+        </Grid2>
+        <Divider />
+
+        <Grid2 container alignItems="center" pl={2} py={1}>
+          <Grid2 size={1}>
+            <Place color="info" fontSize="large" />
+          </Grid2>
+          <Grid2 size={11}>
+            <Typography>
+              {activity.venue}, {activity.city}
+            </Typography>
+          </Grid2>
+        </Grid2>
+      </Paper>
+    </Fragment>
+  );
+};
+
+export default ActivityDetailsInfo;
