@@ -7,18 +7,18 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useActivities } from "../../../lib/hooks/useActivities";
 
-type ActivityDetailsProps = {
-  activity: Activity;
-  handleCancelSelectActivity: () => void;
-  handleOpenForm: (id: string) => void;
-};
+const ActivityDetails = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { activity, isLoadingActivity } = useActivities(id);
 
-const ActivityDetails = ({
-  activity,
-  handleCancelSelectActivity,
-  handleOpenForm,
-}: ActivityDetailsProps) => {
+  if (isLoadingActivity) return <Typography>Loading ...</Typography>;
+
+  if (!activity) return <Typography>Activity Not Found</Typography>;
+
   return (
     <Fragment>
       <Card sx={{ borderRadius: 3 }}>
@@ -34,10 +34,10 @@ const ActivityDetails = ({
           <Typography variant="body1">{activity.description}</Typography>
         </CardContent>
         <CardActions>
-          <Button color="primary" onClick={() => handleOpenForm(activity.id)}>
+          <Button component={Link} to={`/edit/${activity.id} `} color="primary">
             Edit
           </Button>
-          <Button color="inherit" onClick={handleCancelSelectActivity}>
+          <Button color="inherit" onClick={() => navigate("/activities")}>
             Cancel
           </Button>
         </CardActions>

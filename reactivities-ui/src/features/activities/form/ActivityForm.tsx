@@ -1,17 +1,13 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { FormEvent, Fragment } from "react";
 import { useActivities } from "../../../lib/hooks/useActivities";
+import { useNavigate, useParams } from "react-router-dom";
 
-type ActivityFormProps = {
-  handleCloseForm: () => void;
-  selectedActivity?: Activity;
-};
-
-const ActivityForm = ({
-  handleCloseForm,
-  selectedActivity,
-}: ActivityFormProps) => {
-  const { updateActivity } = useActivities();
+const ActivityForm = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { updateActivity, createActivity, activity, isLoadingActivity } =
+    useActivities(id);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,17 +18,26 @@ const ActivityForm = ({
       data[key] = value;
     });
 
-    if (selectedActivity) {
-      data.id = selectedActivity.id;
+    if (activity) {
+      data.id = activity.id;
       await updateActivity.mutateAsync(data as unknown as Activity);
-      handleCloseForm();
+      navigate(`/activities/${activity.id}`);
+    } else {
+      createActivity.mutate(data as unknown as Activity, {
+        onSuccess: (id) => {
+          navigate(`/activities/${id}`);
+        },
+      });
     }
   };
+
+  if (isLoadingActivity) return <Typography>Loading ...</Typography>;
+
   return (
     <Fragment>
       <Paper sx={{ borderRadius: 3, padding: 3 }}>
         <Typography variant="h5" gutterBottom color="primary">
-          Create Activity
+          {activity ? "Edit Activity" : "Create Activity"}
         </Typography>
         <Box
           component="form"
@@ -48,7 +53,7 @@ const ActivityForm = ({
           <TextField label="City" />
           <TextField label="Venue" />
           <Box display="flex" justifyContent="end" gap={3}>
-            <Button color="inherit" onClick={handleCloseForm}>
+            <Button color="inherit" onClick={() => console.log("Cancel")}>
               Cancel
             </Button>
             <Button

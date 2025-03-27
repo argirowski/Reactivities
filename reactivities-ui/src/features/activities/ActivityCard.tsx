@@ -8,18 +8,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 type ActivityCardProps = {
   activity: Activity;
-  handleSelectActivity: (id: string) => void;
-  handleDeleteActivity: (id: string) => void;
 };
 
-const ActivityCard = ({
-  activity,
-  handleSelectActivity,
-  handleDeleteActivity,
-}: ActivityCardProps) => {
+const ActivityCard = ({ activity }: ActivityCardProps) => {
   return (
     <Fragment>
       <Card sx={{ borderRadius: 3 }}>
@@ -41,14 +36,15 @@ const ActivityCard = ({
             <Button
               size="medium"
               variant="contained"
-              onClick={() => handleSelectActivity(activity.id)}
+              component={Link}
+              to={`/activities/${activity.id}`}
             >
               View
             </Button>
             <Button
               size="medium"
               variant="contained"
-              onClick={() => handleDeleteActivity(activity.id)}
+              onClick={() => console.log("Delete")}
               color="error"
             >
               Delete
