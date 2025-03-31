@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Typography } from "@mui/material";
+import { Alert, Button, ButtonGroup, Typography } from "@mui/material";
 import agent from "../../lib/api/agent";
 import { Fragment, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
@@ -48,9 +48,14 @@ const TestErrors = () => {
           Server error
         </Button>
         <Button onClick={() => handleError("buggy/unauthorised")}>
-          Unauthorised
+          Unauthorized
         </Button>
       </ButtonGroup>
+      {validationErrors.map((error, index) => (
+        <Alert key={index} severity="error">
+          {error}
+        </Alert>
+      ))}
     </Fragment>
   );
 };
