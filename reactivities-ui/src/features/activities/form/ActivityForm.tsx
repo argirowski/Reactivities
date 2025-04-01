@@ -13,6 +13,7 @@ import SelectCustomInput from "../../../app/shared/components/SelectCustomInput"
 import TextCustomInput from "../../../app/shared/components/TextCustomInput";
 import DateTimeCustomInput from "../../../app/shared/components/DateTimeCustomInput";
 import LocationCustomInput from "../../../app/shared/components/LocationCustomInput";
+import { Activity } from "../../../lib/types";
 
 const ActivityForm = () => {
   const {
@@ -32,12 +33,41 @@ const ActivityForm = () => {
 
   useEffect(() => {
     if (activity) {
-      reset(activity);
+      reset({
+        ...activity,
+        location: {
+          venue: activity.venue,
+          city: activity.city,
+          latitude: activity.latitude,
+          longitude: activity.longitude,
+        },
+      });
     }
   }, [activity, reset]);
 
-  const onSubmit = (data: ActivitySchema) => {
-    console.log(data);
+  const onSubmit = async (data: ActivitySchema) => {
+    const { location, ...rest } = data;
+    const flattenedData = { ...rest, ...location } as Activity;
+    try {
+      if (activity) {
+        updateActivity.mutate(
+          { ...activity, ...flattenedData },
+          {
+            onSuccess: () => {
+              navigate(`/activities/${activity.id}`);
+            },
+          }
+        );
+      } else {
+        createActivity.mutate(flattenedData, {
+          onSuccess: (id) => {
+            navigate(`/activities/${id}`);
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (isLoadingActivity) return <Typography>Loading ...</Typography>;
@@ -63,13 +93,15 @@ const ActivityForm = () => {
             multiline
             rows={3}
           />
-          <SelectCustomInput
-            items={categoryOptions}
-            label="Category"
-            control={control}
-            name="category"
-          />
-          <DateTimeCustomInput label="Date" control={control} name="date" />
+          <Box display="flex" gap={3}>
+            <SelectCustomInput
+              items={categoryOptions}
+              label="Category"
+              control={control}
+              name="category"
+            />
+            <DateTimeCustomInput label="Date" control={control} name="date" />
+          </Box>
           <LocationCustomInput
             control={control}
             label="Enter the Location"
