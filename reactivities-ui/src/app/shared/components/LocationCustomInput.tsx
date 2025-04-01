@@ -12,7 +12,6 @@ import {
   useController,
   UseControllerProps,
 } from "react-hook-form";
-import { LocationIQSuggestion } from "../../../lib/types";
 import axios from "axios";
 
 type LocationCustomInputProps<T extends FieldValues> = {

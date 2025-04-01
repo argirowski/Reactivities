@@ -11,6 +11,7 @@ const sleep = (delay: number) => {
 
 const agent = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
 });
 
 agent.interceptors.request.use((config) => {

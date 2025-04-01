@@ -13,7 +13,6 @@ import SelectCustomInput from "../../../app/shared/components/SelectCustomInput"
 import TextCustomInput from "../../../app/shared/components/TextCustomInput";
 import DateTimeCustomInput from "../../../app/shared/components/DateTimeCustomInput";
 import LocationCustomInput from "../../../app/shared/components/LocationCustomInput";
-import { Activity } from "../../../lib/types";
 
 const ActivityForm = () => {
   const {
