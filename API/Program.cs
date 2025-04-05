@@ -1,9 +1,11 @@
 using API.Middleware;
 using Application.Activities.Queries;
+using Application.Interfaces;
 using Application.Mapping;
 using Application.Validators;
 using Domain;
 using FluentValidation;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -32,6 +34,8 @@ builder.Services.AddMediatR(x =>
     x.AddOpenBehavior(typeof(ValidationBehaviour<,>));
 });
 
+builder.Services.AddScoped<IUserAccessor, UserAccessor>();
+
 // Add AutoMapper to the container and register the services from the assembly containing the MappingProfiles class
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
@@ -41,6 +45,14 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
 builder.Services.AddTransient<ExceptionMiddleware>();
 // Add Identity to the container and configure the options for the User class and the IdentityRole class
 builder.Services.AddIdentityApiEndpoints<User>(opt => { opt.User.RequireUniqueEmail = true; }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddAuthorization(opt =>
+{
+    // Add the IsHostRequirement to the authorization options
+    opt.AddPolicy("IsActivityHost", policy => policy.Requirements.Add(new IsHostRequirement()));
+});
+
+builder.Services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
 var app = builder.Build();
 
