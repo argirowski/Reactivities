@@ -1,0 +1,47 @@
+﻿using Application.Activities.Commands;
+using Application.Activities.Queries;
+using Application.DTO;
+using Domain;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Controllers
+{
+    public class ProfilesController : BaseApiController
+    {
+        [HttpPost("add-photo")]
+        public async Task<ActionResult> AddPhoto([FromForm] IFormFile file)
+        {
+            return HandleResult(await Mediator.Send(new AddPhoto.Command { File = file }));
+        }
+
+        [HttpGet("{userId}/photos")]
+        public async Task<ActionResult<List<Photo>>> GetProfilePhotos(string userId)
+        {
+            return HandleResult(await Mediator.Send(new GetProfilePhotos.Query { UserId = userId }));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateProfile(EditProfile.Command command)
+        {
+            return HandleResult(await Mediator.Send(command));
+        }
+
+        [HttpDelete("{photoId}/photos")]
+        public async Task<ActionResult> DeletePhoto(string photoId)
+        {
+            return HandleResult(await Mediator.Send(new DeletePhoto.Command { PhotoId = photoId }));
+        }
+
+        [HttpPut("{photoId}/setMain")]
+        public async Task<ActionResult> SetMainPhoto(string photoId)
+        {
+            return HandleResult(await Mediator.Send(new SetMainPhoto.Command { PhotoId = photoId }));
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<UserProfileDTO>> GetUserProfile(string userId)
+        {
+            return HandleResult(await Mediator.Send(new GetProfile.Query { UserId = userId }));
+        }
+    }
+}

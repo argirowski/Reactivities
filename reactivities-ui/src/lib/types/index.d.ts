@@ -9,6 +9,19 @@ type Activity = {
   venue: string;
   latitude: number;
   longitude: number;
+  attendees: AttendeeProfile[];
+  isGoing: boolean;
+  isHost: boolean;
+  hostId: string;
+  hostDisplayName: string;
+  hostImageUrl?: string;
+};
+
+type AttendeeProfile = {
+  id: string;
+  displayName: string;
+  bio?: string;
+  imageUrl?: string;
 };
 
 type LocationIQSuggestion = {
@@ -47,4 +60,9 @@ type User = {
   displayName: string;
   email: string;
   imageURL?: string;
+};
+
+type Photo = {
+  id: string;
+  url: string;
 };

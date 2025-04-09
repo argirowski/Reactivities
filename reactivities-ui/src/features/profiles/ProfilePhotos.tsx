@@ -1,0 +1,114 @@
+import { Fragment, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useProfile } from "../../lib/hooks/useProfile";
+import {
+  Box,
+  Button,
+  Divider,
+  ImageList,
+  ImageListItem,
+  Typography,
+} from "@mui/material";
+import PhotoUploadWidget from "../../app/shared/components/PhotoUploadWidget";
+import StarButton from "../../app/shared/components/StarButton";
+import DeleteButton from "../../app/shared/components/DeleteButton";
+
+const ProfilePhotos = () => {
+  const { id } = useParams();
+  const {
+    photos,
+    loadingPhotos,
+    isCurrentUser,
+    uploadPhoto,
+    profile,
+    setMainPhoto,
+    deletePhoto,
+  } = useProfile(id);
+  const [editMode, setEditMode] = useState(false);
+
+  const handleUploadPhoto = (file: Blob) => {
+    uploadPhoto.mutate(file, {
+      onSuccess: () => {
+        setEditMode(false);
+      },
+    });
+    setEditMode(false);
+  };
+
+  if (loadingPhotos) return <Typography>Loading photos...</Typography>;
+  if (!photos) return <Typography>No photos found for this user</Typography>;
+
+  return (
+    <Fragment>
+      <Box>
+        <Box display="flex" justifyContent="space-between">
+          <Typography variant="h5">Photos</Typography>
+          {isCurrentUser && (
+            <Button onClick={() => setEditMode(!editMode)}>
+              {editMode ? "Cancel" : "Add Photo"}
+            </Button>
+          )}
+        </Box>
+        <Divider sx={{ mb: 2 }} />
+
+        {editMode ? (
+          <PhotoUploadWidget
+            handleUploadPhoto={handleUploadPhoto}
+            loading={uploadPhoto.isPending}
+          />
+        ) : (
+          <Fragment>
+            {photos.length === 0 ? (
+              <Typography>No Photos Added Yet !!!</Typography>
+            ) : (
+              <ImageList
+                sx={{ width: 500, height: 450 }}
+                cols={6}
+                rowHeight={164}
+              >
+                {photos.map((item) => (
+                  <ImageListItem key={item.id}>
+                    <img
+                      srcSet={`${item.url.replace(
+                        "/upload",
+                        "/upload/w_164,h_164,c_crop,f_auto,dpr_2,g_face/"
+                      )}`}
+                      src={`${item.url.replace(
+                        "/upload",
+                        "/upload/w_164,h_164,c_crop,f_auto,g_face/"
+                      )}`}
+                      alt="user profile img"
+                      loading="lazy"
+                    />
+                    {isCurrentUser && (
+                      <div>
+                        <Box
+                          sx={{ position: "absolute", top: 0, left: 0 }}
+                          onClick={() => setMainPhoto.mutate(item)}
+                        >
+                          <StarButton
+                            selected={item.url === profile?.imageUrl}
+                          />
+                        </Box>
+                        {profile?.imageUrl !== item.url && (
+                          <Box
+                            sx={{ position: "absolute", top: 0, right: 0 }}
+                            onClick={() => deletePhoto.mutate(item.id)}
+                          >
+                            <DeleteButton />
+                          </Box>
+                        )}
+                      </div>
+                    )}
+                  </ImageListItem>
+                ))}
+              </ImageList>
+            )}
+          </Fragment>
+        )}
+      </Box>
+    </Fragment>
+  );
+};
+
+export default ProfilePhotos;

@@ -17,14 +17,15 @@ const ActivityDetailsPage = () => {
 
   return (
     <Fragment>
-      <Grid2 container spacing={3}></Grid2>
-      <Grid2 size={8}>
-        <ActivityDetailsHeader activity={activity} />
-        <ActivityDetailsInfo activity={activity} />
-        <ActivityDetailsChat />
-      </Grid2>
-      <Grid2 size={4}>
-        <ActivityDetailsSideBar />
+      <Grid2 container spacing={3}>
+        <Grid2 size={8}>
+          <ActivityDetailsHeader activity={activity} />
+          <ActivityDetailsInfo activity={activity} />
+          <ActivityDetailsChat />
+        </Grid2>
+        <Grid2 size={4}>
+          <ActivityDetailsSideBar activity={activity} />
+        </Grid2>
       </Grid2>
     </Fragment>
   );

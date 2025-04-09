@@ -45,7 +45,10 @@ const ActivityDetailsInfo = ({ activity }: ActivityDetailsInfoProps) => {
             <Typography>
               {activity.venue}, {activity.city}
             </Typography>
-            <Button onClick={() => setMapOpen(!mapOpen)}>
+            <Button
+              onClick={() => setMapOpen(!mapOpen)}
+              sx={{ whiteSpace: "nowrap", mx: 2 }}
+            >
               {mapOpen ? "Hide Map" : "Show Map"}
             </Button>
           </Grid2>
