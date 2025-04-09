@@ -66,3 +66,8 @@ type Photo = {
   id: string;
   url: string;
 };
+
+type PagedList<T, TCursor> = {
+  items: T[];
+  nextCursor: TCursor;
+};
