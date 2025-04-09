@@ -45,11 +45,11 @@ const ProfilePhotos = () => {
           <Typography variant="h5">Photos</Typography>
           {isCurrentUser && (
             <Button onClick={() => setEditMode(!editMode)}>
-              {editMode ? "Cancel" : "Add Photo"}
+              {editMode ? "Cancel" : "Add photo"}
             </Button>
           )}
         </Box>
-        <Divider sx={{ mb: 2 }} />
+        <Divider sx={{ my: 2 }} />
 
         {editMode ? (
           <PhotoUploadWidget
@@ -57,27 +57,23 @@ const ProfilePhotos = () => {
             loading={uploadPhoto.isPending}
           />
         ) : (
-          <Fragment>
+          <>
             {photos.length === 0 ? (
-              <Typography>No Photos Added Yet !!!</Typography>
+              <Typography>No photos added yet</Typography>
             ) : (
-              <ImageList
-                sx={{ width: 500, height: 450 }}
-                cols={6}
-                rowHeight={164}
-              >
+              <ImageList sx={{ height: 450 }} cols={6} rowHeight={164}>
                 {photos.map((item) => (
                   <ImageListItem key={item.id}>
                     <img
                       srcSet={`${item.url.replace(
-                        "/upload",
-                        "/upload/w_164,h_164,c_crop,f_auto,dpr_2,g_face/"
+                        "/upload/",
+                        "/upload/w_164,h_164,c_fill,f_auto,dpr_2,g_face/"
                       )}`}
                       src={`${item.url.replace(
-                        "/upload",
-                        "/upload/w_164,h_164,c_crop,f_auto,g_face/"
+                        "/upload/",
+                        "/upload/w_164,h_164,c_fill,f_auto,g_face/"
                       )}`}
-                      alt="user profile img"
+                      alt={"user profile img"}
                       loading="lazy"
                     />
                     {isCurrentUser && (
@@ -104,7 +100,7 @@ const ProfilePhotos = () => {
                 ))}
               </ImageList>
             )}
-          </Fragment>
+          </>
         )}
       </Box>
     </Fragment>

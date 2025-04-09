@@ -59,7 +59,7 @@ type User = {
   id: string;
   displayName: string;
   email: string;
-  imageURL?: string;
+  imageUrl?: string;
 };
 
 type Photo = {

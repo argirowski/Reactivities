@@ -1,6 +1,7 @@
 import { Box, Paper, Tabs, Tab } from "@mui/material";
 import { Fragment, SyntheticEvent, useState } from "react";
 import ProfilePhotos from "./ProfilePhotos";
+import ProfileAbout from "./ProfileAbout";
 
 const ProfileContent = () => {
   const [value, setValue] = useState(0);
@@ -10,9 +11,9 @@ const ProfileContent = () => {
   };
 
   const tabContent = [
-    { label: "About", content: <div>About</div> },
+    { label: "About", content: <ProfileAbout /> },
     { label: "Photos", content: <ProfilePhotos /> },
-    { label: "Events", content: <div>EVents</div> },
+    { label: "Events", content: <div>Events</div> },
     { label: "Followers", content: <div>Followers</div> },
     { label: "Following", content: <div>Following</div> },
   ];

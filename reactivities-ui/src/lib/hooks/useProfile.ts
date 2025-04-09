@@ -66,11 +66,11 @@ export const useProfile = (id?: string) => {
       await queryClient.invalidateQueries({
         queryKey: ["photos", id],
       });
-      queryClient.setQueryData(["user"], (data: User) => {
+      queryClient.setQueryData(["currentUser"], (data: User) => {
         if (!data) return data;
         return {
           ...data,
-          imageUrl: data.imageURL ?? photo.url,
+          imageUrl: data.imageUrl ?? photo.url,
         };
       });
       queryClient.setQueryData(["profile", id], (data: AttendeeProfile) => {
@@ -88,7 +88,7 @@ export const useProfile = (id?: string) => {
       await agent.put(`/profiles/${photo.id}/setMain`);
     },
     onSuccess: (_, photo) => {
-      queryClient.setQueryData(["user"], (userData: User) => {
+      queryClient.setQueryData(["currentUser"], (userData: User) => {
         if (!userData) return userData;
         return {
           ...userData,
@@ -129,7 +129,7 @@ export const useProfile = (id?: string) => {
           bio: profile.bio,
         };
       });
-      queryClient.setQueryData(["user"], (userData: User) => {
+      queryClient.setQueryData(["currentUser"], (userData: User) => {
         if (!userData) return userData;
         return {
           ...userData,
@@ -161,7 +161,7 @@ export const useProfile = (id?: string) => {
   //   });
 
   const isCurrentUser = useMemo(() => {
-    return id === queryClient.getQueryData<User>(["user"])?.id;
+    return id === queryClient.getQueryData<User>(["currentUser"])?.id;
   }, [id, queryClient]);
 
   return {

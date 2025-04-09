@@ -118,7 +118,7 @@ export const useActivities = (id?: string) => {
                   {
                     id: currentUser.id,
                     displayName: currentUser.displayName,
-                    imageUrl: currentUser.imageURL,
+                    imageUrl: currentUser.imageUrl,
                   },
                 ],
           };

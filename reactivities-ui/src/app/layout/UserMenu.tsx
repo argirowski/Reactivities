@@ -33,7 +33,7 @@ const UserMenu = () => {
         sx={{ fontSize: "1.1rem" }}
       >
         <Box display="flex" alignItems="center" gap={2}>
-          <Avatar src={currentUser?.imageURL} alt="current user image" />
+          <Avatar src={currentUser?.imageUrl} alt="current user image" />
           {currentUser?.displayName}
         </Box>
       </Button>
