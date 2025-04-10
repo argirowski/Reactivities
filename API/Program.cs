@@ -1,4 +1,5 @@
 using API.Middleware;
+using API.SignalR;
 using Application.Activities.Queries;
 using Application.Interfaces;
 using Application.Mapping;
@@ -27,6 +28,7 @@ builder.Services.AddControllers(opt =>
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors();
+builder.Services.AddSignalR();
 // Add MediatR to the container and register the services from the assembly containing the GetActivityList.Handler class
 builder.Services.AddMediatR(x =>
 {
@@ -74,6 +76,8 @@ app.UseAuthorization();
 app.MapControllers();
 // Map the Identity API endpoints for the User class
 app.MapGroup("api").MapIdentityApi<User>();
+// Map the SignalR hub for comments
+app.MapHub<CommentHub>("/comments");
 // Create a scope to get the service provider
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
