@@ -22,8 +22,12 @@ const AvatarPopOver = ({ attendeeProfile }: AvatarPopOverProps) => {
   return (
     <Fragment>
       <Avatar
-        src={attendeeProfile.imageUrl}
         alt={attendeeProfile.displayName + " image"}
+        src={attendeeProfile.imageUrl}
+        sx={{
+          border: attendeeProfile.following ? 3 : 0,
+          borderColor: "secondary.main",
+        }}
         component={Link}
         to={`/profiles/${attendeeProfile.id}`}
         onMouseEnter={handlePopoverOpen}

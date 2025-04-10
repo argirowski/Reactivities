@@ -3,6 +3,7 @@ import { Fragment, SyntheticEvent, useState } from "react";
 import ProfilePhotos from "./ProfilePhotos";
 import ProfileAbout from "./ProfileAbout";
 import ProfileActivities from "./ProfileActivities";
+import ProfileFollowings from "./ProfileFollowings";
 
 const ProfileContent = () => {
   const [value, setValue] = useState(0);
@@ -15,8 +16,8 @@ const ProfileContent = () => {
     { label: "About", content: <ProfileAbout /> },
     { label: "Photos", content: <ProfilePhotos /> },
     { label: "Events", content: <ProfileActivities /> },
-    { label: "Followers", content: <div>Followers</div> },
-    { label: "Following", content: <div>Following</div> },
+    { label: "Followers", content: <ProfileFollowings activeTab={value} /> },
+    { label: "Following", content: <ProfileFollowings activeTab={value} /> },
   ];
   return (
     <Fragment>

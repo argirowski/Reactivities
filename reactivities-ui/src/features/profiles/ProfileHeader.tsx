@@ -15,8 +15,7 @@ import { useProfile } from "../../lib/hooks/useProfile";
 
 const ProfileHeader = () => {
   const { id } = useParams();
-  const isFollowing = true;
-  const { isCurrentUser, profile } = useProfile(id);
+  const { isCurrentUser, profile, updateFollowing } = useProfile(id);
 
   if (!profile) return null;
 
@@ -33,7 +32,7 @@ const ProfileHeader = () => {
               />
               <Box display="flex" flexDirection="column" gap={2}>
                 <Typography variant="h4">{profile.displayName}</Typography>
-                {isFollowing && (
+                {profile.following && (
                   <Chip
                     variant="outlined"
                     color="secondary"
@@ -49,22 +48,24 @@ const ProfileHeader = () => {
               <Box display="flex" justifyContent="space-around" width="100%">
                 <Box textAlign="center">
                   <Typography variant="h6">Followers</Typography>
-                  <Typography variant="h3">10</Typography>
+                  <Typography variant="h3">{profile.followersCount}</Typography>
                 </Box>
                 <Box textAlign="center">
                   <Typography variant="h6">Following</Typography>
-                  <Typography variant="h3">5</Typography>
+                  <Typography variant="h3">{profile.followingCount}</Typography>
                 </Box>
               </Box>
               {!isCurrentUser && (
                 <>
                   <Divider sx={{ width: "100%" }} />
                   <Button
+                    onClick={() => updateFollowing.mutate()}
+                    disabled={updateFollowing.isPending}
                     fullWidth
                     variant="outlined"
-                    color={isFollowing ? "error" : "success"}
+                    color={profile.following ? "error" : "success"}
                   >
-                    {isFollowing ? "Unfollow" : "Follow"}
+                    {profile.following ? "Unfollow" : "Follow"}
                   </Button>
                 </>
               )}

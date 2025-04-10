@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.HandlerResult;
+using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
@@ -17,12 +18,15 @@ namespace Application.Activities.Queries
         }
 
         // This is the query handler that will be used to handle the query
-        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Query, Result<ActivityDTO>>
+        public class Handler(AppDbContext context, IMapper mapper, IUserAccessor userAccessor) : IRequestHandler<Query, Result<ActivityDTO>>
         {
             public async Task<Result<ActivityDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
                 // ProjectTo is used to project the data from the database to the DTO
-                var activity = await context.Activities.ProjectTo<ActivityDTO>(mapper.ConfigurationProvider).FirstOrDefaultAsync(x => request.Id == x.Id, cancellationToken);
+                var activity = await context.Activities
+                    .ProjectTo<ActivityDTO>(mapper.ConfigurationProvider,
+                        new { currentUserId = userAccessor.GetUserId() })
+                    .FirstOrDefaultAsync(x => request.Id == x.Id, cancellationToken);
 
                 if (activity == null)
                 {

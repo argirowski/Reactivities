@@ -8,7 +8,6 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import { profile } from "console";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -17,25 +16,26 @@ type ProfileCardProps = {
 };
 
 const ProfileCard = ({ attendeeProfile }: ProfileCardProps) => {
-  const following = false; // Placeholder for following state
   return (
     <Fragment>
       <Link
-        to={`/profile/${attendeeProfile.id}`}
+        to={`/profiles/${attendeeProfile.id}`}
         style={{ textDecoration: "none" }}
       >
         <Card
-          sx={{ p: 3, maxWidth: 300, textDecoration: "none", borderRadius: 3 }}
-          elevation={3}
+          sx={{
+            borderRadius: 3,
+            p: 3,
+            maxWidth: 250,
+            textDecoration: "none",
+          }}
+          elevation={4}
         >
           <CardMedia
             component="img"
-            src={attendeeProfile.imageUrl || "/images/user.png"}
-            alt={attendeeProfile.displayName}
-            sx={{
-              width: "100%",
-              zIndex: 50,
-            }}
+            src={attendeeProfile?.imageUrl || "/images/user.png"}
+            sx={{ width: "100%", zIndex: 50 }}
+            alt={attendeeProfile.displayName + " image"}
           />
           <CardContent>
             <Box display="flex" flexDirection="column" gap={1}>
@@ -54,7 +54,8 @@ const ProfileCard = ({ attendeeProfile }: ProfileCardProps) => {
                   {attendeeProfile.bio}
                 </Typography>
               )}
-              {following && (
+
+              {attendeeProfile.following && (
                 <Chip
                   size="small"
                   label="Following"
@@ -68,12 +69,14 @@ const ProfileCard = ({ attendeeProfile }: ProfileCardProps) => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "start",
               alignItems: "center",
+              justifyContent: "start",
             }}
           >
             <Person />
-            <Typography sx={{ ml: 1 }}>300 Followers</Typography>
+            <Typography sx={{ ml: 1 }}>
+              {attendeeProfile.followersCount} Followers
+            </Typography>
           </Box>
         </Card>
       </Link>

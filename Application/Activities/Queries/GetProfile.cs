@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using Application.HandlerResult;
+using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
@@ -15,22 +16,19 @@ namespace Application.Activities.Queries
             public required string UserId { get; set; }
         }
 
-        public class Handler(AppDbContext appDbContext, IMapper mapper) : IRequestHandler<Query, Result<UserProfileDTO>>
+        public class Handler(AppDbContext appDbContext, IMapper mapper, IUserAccessor userAccessor)
+            : IRequestHandler<Query, Result<UserProfileDTO>>
         {
             public async Task<Result<UserProfileDTO>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var profile = await appDbContext.Users.ProjectTo<UserProfileDTO>(mapper.ConfigurationProvider)
+                var profile = await appDbContext.Users
+                    .ProjectTo<UserProfileDTO>(mapper.ConfigurationProvider,
+                        new { currentUserId = userAccessor.GetUserId() })
                     .SingleOrDefaultAsync(x => x.Id == request.UserId, cancellationToken);
 
-                if (profile == null)
-                {
-                    return Result<UserProfileDTO>.Failure("User Profile not found", 404);
-                }
-                else
-                {
-                    return Result<UserProfileDTO>.Success(profile);
-                }
-
+                return profile == null
+                    ? Result<UserProfileDTO>.Failure("Profile not found", 404)
+                    : Result<UserProfileDTO>.Success(profile);
             }
         }
     }

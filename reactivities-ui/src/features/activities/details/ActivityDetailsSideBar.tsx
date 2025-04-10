@@ -10,14 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 type ActivityDetailsSideBarProps = {
   activity: Activity;
 };
 
 const ActivityDetailsSideBar = ({ activity }: ActivityDetailsSideBarProps) => {
-  const following = true;
-
   return (
     <Fragment>
       <Paper
@@ -30,7 +29,7 @@ const ActivityDetailsSideBar = ({ activity }: ActivityDetailsSideBarProps) => {
         }}
       >
         <Typography variant="h6">
-          {activity.attendees.length} people are going
+          {activity.attendees.length} people going
         </Typography>
       </Paper>
       <Paper sx={{ padding: 2 }}>
@@ -38,18 +37,18 @@ const ActivityDetailsSideBar = ({ activity }: ActivityDetailsSideBarProps) => {
           <Grid2 key={attendee.id} container alignItems="center">
             <Grid2 size={8}>
               <List sx={{ display: "flex", flexDirection: "column" }}>
-                <ListItem>
+                <ListItem component={Link} to={`/profiles/${attendee.id}`}>
                   <ListItemAvatar>
                     <Avatar
-                      alt={attendee.displayName + "imgage"}
-                      src={attendee.imageUrl}
                       variant="rounded"
+                      alt={attendee.displayName + " image"}
+                      src={attendee.imageUrl}
                       sx={{ width: 75, height: 75, mr: 3 }}
                     />
                   </ListItemAvatar>
                   <ListItemText>
                     <Typography variant="h6">{attendee.displayName}</Typography>
-                    {following && (
+                    {attendee.following && (
                       <Typography variant="body2" color="orange">
                         Following
                       </Typography>

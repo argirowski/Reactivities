@@ -22,6 +22,9 @@ type AttendeeProfile = {
   displayName: string;
   bio?: string;
   imageUrl?: string;
+  followersCount?: number;
+  followingCount?: number;
+  following?: boolean;
 };
 
 type LocationIQSuggestion = {

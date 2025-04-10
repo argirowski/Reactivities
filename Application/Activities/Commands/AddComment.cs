@@ -17,12 +17,12 @@ namespace Application.Activities.Commands
             public required string ActivityId { get; set; }
         }
 
-        public class Handler(AppDbContext context, IMapper mapper, IUserAccessor userAccessor)
+        public class Handler(AppDbContext appDbContext, IMapper mapper, IUserAccessor userAccessor)
             : IRequestHandler<Command, Result<CommentDTO>>
         {
             public async Task<Result<CommentDTO>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var activity = await context.Activities
+                var activity = await appDbContext.Activities
                     .Include(x => x.Comments)
                 .ThenInclude(x => x.User)
                     .FirstOrDefaultAsync(x => x.Id == request.ActivityId, cancellationToken);
@@ -38,7 +38,7 @@ namespace Application.Activities.Commands
                     Body = request.Body
                 };
                 activity.Comments.Add(comment);
-                var result = await context.SaveChangesAsync(cancellationToken) > 0;
+                var result = await appDbContext.SaveChangesAsync(cancellationToken) > 0;
                 return result
                     ? Result<CommentDTO>.Success(mapper.Map<CommentDTO>(comment))
                     : Result<CommentDTO>.Failure("Failed to add comment", 400);
