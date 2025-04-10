@@ -1,11 +1,11 @@
 ﻿using Application.HandlerResult;
 using Application.Interfaces;
-using Domain;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Persistence;
 
-namespace Application.Activities.Commands
+namespace Application.Features.Commands
 {
     public class AddPhoto
     {

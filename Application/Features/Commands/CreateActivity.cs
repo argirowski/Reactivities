@@ -3,10 +3,11 @@ using Application.HandlerResult;
 using Application.Interfaces;
 using AutoMapper;
 using Domain;
+using Domain.Entities;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities.Commands
+namespace Application.Features.Commands
 {
     public class CreateActivity
     {

@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistence;

@@ -1,4 +1,5 @@
 ﻿using Application.DTO;
+using Application.Features.Queries;
 using Application.HandlerResult;
 using Application.Interfaces;
 using Application.Pagination;
@@ -8,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Activities.Queries
+namespace Application.Features.Queries
 {
     public class GetActivityList
     {

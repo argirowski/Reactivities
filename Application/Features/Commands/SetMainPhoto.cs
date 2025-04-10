@@ -3,9 +3,9 @@ using Application.Interfaces;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities.Commands
+namespace Application.Features.Commands
 {
-    public class DeletePhoto
+    public class SetMainPhoto
     {
         public class Command : IRequest<Result<Unit>>
         {
@@ -24,14 +24,7 @@ namespace Application.Activities.Commands
                     return Result<Unit>.Failure("Photo not found", 400);
                 }
 
-                if (photo.Url == user.ImageUrl)
-                {
-                    return Result<Unit>.Failure("You cannot delete your main photo", 400);
-                }
-
-                await photoService.DeletePhoto(photo.PublicId);
-
-                user.Photos.Remove(photo);
+                user.ImageUrl = photo.Url;
 
                 var result = await appDbContext.SaveChangesAsync(cancellationToken) > 0;
 
@@ -41,7 +34,7 @@ namespace Application.Activities.Commands
                 }
                 else
                 {
-                    return Result<Unit>.Failure("Problem deleting photo", 500);
+                    return Result<Unit>.Failure("Problem setting up the main photo", 500);
                 }
             }
         }

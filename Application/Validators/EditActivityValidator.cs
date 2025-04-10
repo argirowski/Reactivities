@@ -1,4 +1,4 @@
-﻿using Application.Activities.Commands;
+﻿using Application.Features.Commands;
 using Application.DTO;
 using FluentValidation;
 

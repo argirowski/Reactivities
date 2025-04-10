@@ -1,5 +1,5 @@
-﻿using Application.Activities.Commands;
-using Application.DTO;
+﻿using Application.DTO;
+using Application.Features.Commands;
 using FluentValidation;
 
 namespace Application.Validators

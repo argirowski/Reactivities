@@ -1,4 +1,4 @@
-﻿using Application.Activities.Commands;
+﻿using Application.Features.Commands;
 using FluentValidation;
 
 namespace Application.Validators

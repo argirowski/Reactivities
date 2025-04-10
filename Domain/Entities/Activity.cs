@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Domain
+namespace Domain.Entities
 {
     [Index(nameof(Date))]
     public class Activity

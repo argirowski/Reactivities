@@ -1,5 +1,5 @@
-﻿using Application.Activities.Commands;
-using Application.Activities.Queries;
+﻿using Application.Features.Commands;
+using Application.Features.Queries;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 

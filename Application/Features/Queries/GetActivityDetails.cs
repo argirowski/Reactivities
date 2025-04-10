@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Activities.Queries
+namespace Application.Features.Queries
 {
     public class GetActivityDetails
     {

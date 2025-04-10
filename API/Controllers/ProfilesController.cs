@@ -1,7 +1,7 @@
-﻿using Application.Activities.Commands;
-using Application.Activities.Queries;
-using Application.DTO;
-using Domain;
+﻿using Application.DTO;
+using Application.Features.Commands;
+using Application.Features.Queries;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

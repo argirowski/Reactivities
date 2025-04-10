@@ -4,7 +4,7 @@ using Application.Interfaces;
 using MediatR;
 using Persistence;
 
-namespace Application.Activities.Commands
+namespace Application.Features.Commands
 {
     public class EditProfile
     {

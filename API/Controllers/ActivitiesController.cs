@@ -1,6 +1,6 @@
-﻿using Application.Activities.Commands;
-using Application.Activities.Queries;
-using Application.DTO;
+﻿using Application.DTO;
+using Application.Features.Commands;
+using Application.Features.Queries;
 using Application.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

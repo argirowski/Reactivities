@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Domain
+namespace Domain.Entities
 {
     public class Photo
     {

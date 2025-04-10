@@ -1,11 +1,11 @@
 ﻿using Application.HandlerResult;
 using Application.Interfaces;
-using Domain;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Activities.Commands
+namespace Application.Features.Commands
 {
     public class UpdateAttendance
     {

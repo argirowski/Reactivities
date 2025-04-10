@@ -1,6 +1,6 @@
 ﻿using Application.Pagination;
 
-namespace Application.Activities.Queries
+namespace Application.Features.Queries
 {
     public class ActivityParams : PaginationParams<DateTime?>
     {

@@ -1,10 +1,10 @@
 using API.Middleware;
 using API.SignalR;
-using Application.Activities.Queries;
+using Application.Features.Queries;
 using Application.Interfaces;
 using Application.Mapping;
 using Application.Validators;
-using Domain;
+using Domain.Entities;
 using FluentValidation;
 using Infrastructure.Photos;
 using Infrastructure.Security;
