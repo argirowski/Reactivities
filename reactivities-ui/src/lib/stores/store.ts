@@ -1,14 +1,17 @@
 import { createContext } from "react";
-import CounterStore from "./CounterStore";
-import { UiStore } from "./UiStore";
+import counterStore from "./counterStore";
+import { uiStore } from "./uiStore";
+import { activityStore } from "./activityStore";
 
 interface Store {
-  counterStore: CounterStore;
-  uiStore: UiStore;
+  counterStore: counterStore;
+  uiStore: uiStore;
+  activityStore: activityStore;
 }
 
 export const store: Store = {
-  counterStore: new CounterStore(),
-  uiStore: new UiStore(),
+  counterStore: new counterStore(),
+  uiStore: new uiStore(),
+  activityStore: new activityStore(),
 };
 export const StoreContext = createContext(store);

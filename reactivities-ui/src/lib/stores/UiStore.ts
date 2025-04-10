@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-export class UiStore {
+export class uiStore {
   isLoading = false;
 
   constructor() {

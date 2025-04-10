@@ -3,8 +3,9 @@ import { Fragment, useEffect } from "react";
 import ActivityCard from "../ActivityCard";
 import { useActivities } from "../../../lib/hooks/useActivities";
 import { useInView } from "react-intersection-observer";
+import { observer } from "mobx-react-lite";
 
-const ActivityList = () => {
+const ActivityList = observer(() => {
   const { activitiesGroup, isLoading, hasNextPage, fetchNextPage } =
     useActivities();
   const { ref, inView } = useInView({
@@ -41,6 +42,6 @@ const ActivityList = () => {
       </Box>
     </Fragment>
   );
-};
+});
 
 export default ActivityList;

@@ -25,6 +25,7 @@ namespace Application.Mapping
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.User.Id));
 
             CreateMap<User, UserProfileDTO>();
+            CreateMap<Activity, UserActivityDTO>();
         }
     }
 }

@@ -2,7 +2,8 @@
 Title: Full-Stack Social Network Application with .NET Core, React, and MobX
 
 📌 Goal:
-Build a feature-rich social network application, akin to Meetup or Facebook, from scratch using .NET Core 9.0, React 19 with TypeScript, and MobX. The application will allow users to register, authenticate, and participate in events, emphasizing modern design patterns, scalable architecture, and real-time web communication.
+Build a feature-rich social network application, akin to Meetup or Facebook, from scratch using .NET Core 9.0, React 19 with TypeScript, and MobX.
+The application will allow users to register, authenticate, and participate in events, emphasizing modern design patterns, scalable architecture, and real-time web communication.
 
 📌 Core Features & Highlights
 ✅ Backend Development:

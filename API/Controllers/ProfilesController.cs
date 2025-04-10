@@ -43,5 +43,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new GetProfile.Query { UserId = userId }));
         }
+
+        [HttpGet("{userId}/activities")]
+        public async Task<ActionResult<UserProfileDTO>> GetUserActivities(string userId, string filter)
+        {
+            return HandleResult(await Mediator.Send(new GetUserActivities.Query { UserId = userId, Filter = filter }));
+        }
     }
 }

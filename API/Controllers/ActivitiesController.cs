@@ -12,9 +12,9 @@ namespace API.Controllers
     public class ActivitiesController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<PagedList<ActivityDTO, DateTime?>>> GetActivities(DateTime? cursor)
+        public async Task<ActionResult<PagedList<ActivityDTO, DateTime?>>> GetActivities([FromQuery] ActivityParams activityParams)
         {
-            return HandleResult(await Mediator.Send(new GetActivityList.Query { Cursor = cursor }));
+            return HandleResult(await Mediator.Send(new GetActivityList.Query { ActivityParams = activityParams }));
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<ActivityDTO>> GetActivityDetail(string id)

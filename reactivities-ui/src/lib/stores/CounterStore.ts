@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-export default class CounterStore {
+export default class counterStore {
   title = "Counter Store";
   count = 10;
   events: string[] = [`Initial count is ${this.count}`];
