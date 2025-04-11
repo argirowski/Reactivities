@@ -15,13 +15,7 @@ import DateTimeCustomInput from "../../../app/shared/components/DateTimeCustomIn
 import LocationCustomInput from "../../../app/shared/components/LocationCustomInput";
 
 const ActivityForm = () => {
-  const {
-    register,
-    control,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ActivitySchema>({
+  const { control, reset, handleSubmit } = useForm<ActivitySchema>({
     mode: "onTouched",
     resolver: zodResolver(activitySchema),
   });
