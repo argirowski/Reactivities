@@ -73,11 +73,18 @@ app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials(
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Serve static files from the wwwroot folder
+app.UseDefaultFiles();
+// Serve static files from the wwwroot folder
+app.UseStaticFiles();
+
 app.MapControllers();
 // Map the Identity API endpoints for the User class
 app.MapGroup("api").MapIdentityApi<User>();
 // Map the SignalR hub for comments
 app.MapHub<CommentHub>("/comments");
+// Map the FallBack controller to handle all other requests
+app.MapFallbackToController("Index", "FallBack");
 // Create a scope to get the service provider
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
