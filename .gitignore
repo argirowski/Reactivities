@@ -26,3 +26,9 @@ reactivities-ui/localhost-key.pem
 *.cache
 *.log
 .DS_Store
+
+# Docker
+*.env
+docker-compose.override.yml
+.dockerignore
+docker-compose.logs
