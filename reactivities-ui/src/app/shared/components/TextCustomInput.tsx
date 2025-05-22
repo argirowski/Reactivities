@@ -23,7 +23,10 @@ const TextCustomInput = <T extends FieldValues>({
     );
   }
 
-  const { field, fieldState } = useController({ ...props });
+  const { field, fieldState } = useController({
+    ...props,
+    control: effectiveControl,
+  });
 
   return (
     <Fragment>

@@ -43,8 +43,11 @@ builder.Services.Configure<ResendClientOptions>(opt =>
 {
     opt.ApiToken = builder.Configuration["Resend:APIToken"]!;
 });
-builder.Services.AddTransient<IResend, ResendClient>();
-builder.Services.AddTransient<IEmailSender<User>, EmailSender>();
+builder.Services.AddScoped<IResend, ResendClient>();
+// Register a no-op singleton for Identity's root provider
+builder.Services.AddSingleton<IEmailSender<User>, NoOpEmailSender>();
+// Register the real EmailSender as scoped for your controllers/services
+builder.Services.AddScoped<EmailSender>();
 
 builder.Services.AddScoped<IUserAccessor, UserAccessor>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
