@@ -4,10 +4,20 @@ import agent from "../api/agent";
 import { useNavigate } from "react-router-dom";
 import { RegisterSchema } from "../schemas/registerSchema";
 import { toast } from "react-toastify";
+import { ChangePasswordSchema } from "../schemas/changePasswordSchema";
 
 export const useAccount = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const { data: currentUser, isLoading: loadingUserInfo } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: async () => {
+      const response = await agent.get<User>("/account/user-info");
+      return response.data;
+    },
+    enabled: !queryClient.getQueryData(["currentUser"]),
+  });
 
   const loginUser = useMutation({
     mutationFn: async (creds: LoginSchema) => {
@@ -22,10 +32,6 @@ export const useAccount = () => {
     mutationFn: async (creds: RegisterSchema) => {
       await agent.post("/account/register", creds);
     },
-    onSuccess: () => {
-      toast.success("Registration successful, please login to continue.");
-      navigate("/login");
-    },
   });
 
   const logoutUser = useMutation({
@@ -39,14 +45,73 @@ export const useAccount = () => {
     },
   });
 
-  const { data: currentUser, isLoading: loadingUserInfo } = useQuery({
-    queryKey: ["currentUser"],
-    queryFn: async () => {
-      const response = await agent.get<User>("/account/user-info");
-      return response.data;
+  const verifyEmail = useMutation({
+    mutationFn: async ({ userId, code }: { userId: string; code: string }) => {
+      await agent.get(`/confirmEmail?userId=${userId}&code=${code}`);
     },
-    enabled: !queryClient.getQueryData(["currentUser"]),
   });
 
-  return { loginUser, currentUser, logoutUser, registerUser, loadingUserInfo };
+  const resendConfirmationEmail = useMutation({
+    mutationFn: async ({
+      email,
+      userId,
+    }: {
+      email?: string;
+      userId?: string | null;
+    }) => {
+      await agent.get(`/account/resendConfirmEmail`, {
+        params: {
+          email,
+          userId,
+        },
+      });
+    },
+    onSuccess: () => {
+      toast.success("Email sent - please check your email");
+    },
+  });
+
+  const changePassword = useMutation({
+    mutationFn: async (data: ChangePasswordSchema) => {
+      await agent.post("/account/change-password", data);
+    },
+  });
+
+  const forgotPassword = useMutation({
+    mutationFn: async (email: string) => {
+      await agent.post("/forgotPassword", { email });
+    },
+  });
+
+  const resetPassword = useMutation({
+    mutationFn: async (data: ResetPassword) => {
+      await agent.post("/resetPassword", data);
+    },
+  });
+
+  const fetchGithubToken = useMutation({
+    mutationFn: async (code: string) => {
+      const response = await agent.post(`/account/github-login?code=${code}`);
+      return response.data;
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["user"],
+      });
+    },
+  });
+
+  return {
+    loginUser,
+    currentUser,
+    logoutUser,
+    registerUser,
+    loadingUserInfo,
+    verifyEmail,
+    resendConfirmationEmail,
+    changePassword,
+    forgotPassword,
+    resetPassword,
+    fetchGithubToken,
+  };
 };

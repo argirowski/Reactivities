@@ -17,6 +17,12 @@ type Activity = {
   hostImageUrl?: string;
 };
 
+type ResetPassword = {
+  email: string;
+  resetCode: string;
+  newPassword: string;
+};
+
 type AttendeeProfile = {
   id: string;
   displayName: string;

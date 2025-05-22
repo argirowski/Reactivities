@@ -32,3 +32,6 @@ reactivities-ui/localhost-key.pem
 docker-compose.override.yml
 .dockerignore
 docker-compose.logs
+
+# WWWRoot folder
+API/wwwroot/

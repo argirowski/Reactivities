@@ -12,6 +12,11 @@ import LogInForm from "../../features/account/LogInForm";
 import RegisterForm from "../../features/account/RegisterForm";
 import RequireAuth from "./RequireAuth";
 import ProfilePage from "../../features/profiles/ProfilePage";
+import ChangePasswordForm from "../../features/account/ChangePasswordForm";
+import VerifyEmail from "../../features/account/VerifyEmail";
+import ForgotPasswordForm from "../../features/account/ForgotPasswordForm";
+import ResetPasswordForm from "../../features/account/ResetPasswordForm";
+import AuthCallBack from "../../features/account/AuthCallBack";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +31,7 @@ export const router = createBrowserRouter([
           { path: "add", element: <ActivityForm key="add" /> }, // The key is added to force the component to re-render when the route changes
           { path: "edit/:id", element: <ActivityForm key="edit" /> }, // The key is added to force the component to re-render when the route changes
           { path: "profiles/:id", element: <ProfilePage /> },
+          { path: "change-password", element: <ChangePasswordForm /> },
         ],
       },
       { path: "", element: <HomePage /> },
@@ -36,6 +42,10 @@ export const router = createBrowserRouter([
       { path: "server-error", element: <ServerError /> },
       { path: "login", element: <LogInForm /> },
       { path: "register", element: <RegisterForm /> },
+      { path: "confirm-email", element: <VerifyEmail /> },
+      { path: "forgot-password", element: <ForgotPasswordForm /> },
+      { path: "reset-password", element: <ResetPasswordForm /> },
+      { path: "auth-callback", element: <AuthCallBack /> },
       { path: "*", element: <Navigate replace to="/not-found" /> }, // Redirect to NotFound for any other routes, the * wildcard matches all paths
     ],
   },

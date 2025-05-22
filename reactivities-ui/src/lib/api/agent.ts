@@ -21,12 +21,16 @@ agent.interceptors.request.use((config) => {
 
 agent.interceptors.response.use(
   async (response) => {
-    await sleep(1000);
+    if (process.env.REACT_APP_ENV !== "production") {
+      await sleep(1000);
+    }
     store.uiStore.isIdle();
     return response;
   },
   async (error) => {
-    await sleep(1000);
+    if (process.env.REACT_APP_ENV !== "production") {
+      await sleep(1000);
+    }
     store.uiStore.isIdle();
     const { status, data } = error.response;
 
@@ -45,7 +49,11 @@ agent.interceptors.response.use(
         }
         break;
       case 401:
-        toast.error("Unauthorized error");
+        if (data.detail === "NotAllowed") {
+          throw new Error(data.detail);
+        } else {
+          toast.error("Unauthorized error");
+        }
         break;
       case 403:
         toast.error("Forbidden error");

@@ -4,12 +4,25 @@ import {
   FieldValues,
   useController,
   UseControllerProps,
+  useFormContext,
 } from "react-hook-form";
 
 type TextInputProps<T extends FieldValues> = {} & UseControllerProps<T> &
   TextFieldProps;
 
-const TextCustomInput = <T extends FieldValues>(props: TextInputProps<T>) => {
+const TextCustomInput = <T extends FieldValues>({
+  control,
+  ...props
+}: TextInputProps<T>) => {
+  const formContext = useFormContext<T>();
+  const effectiveControl = control || formContext?.control;
+
+  if (!effectiveControl) {
+    throw new Error(
+      "Text input must be used within a form provider or passed as props"
+    );
+  }
+
   const { field, fieldState } = useController({ ...props });
 
   return (
