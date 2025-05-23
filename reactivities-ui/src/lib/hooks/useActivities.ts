@@ -42,7 +42,7 @@ export const useActivities = (id?: string) => {
       );
       return response.data;
     },
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    // staleTime: 1000 * 60 * 5, // 5 minutes
     placeholderData: keepPreviousData, // This is to keep the previous data while fetching new data
     initialPageParam: null,
     getNextPageParam: (lastPage) => lastPage.nextCursor,

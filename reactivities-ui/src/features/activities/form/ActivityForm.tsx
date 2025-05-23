@@ -102,7 +102,7 @@ const ActivityForm = () => {
           />
 
           <Box display="flex" justifyContent="end" gap={3}>
-            <Button color="inherit" onClick={() => console.log("Cancel")}>
+            <Button color="inherit" onClick={() => navigate(-1)}>
               Cancel
             </Button>
             <Button
