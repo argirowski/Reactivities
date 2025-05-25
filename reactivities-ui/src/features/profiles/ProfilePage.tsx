@@ -1,4 +1,5 @@
-import { Grid2, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useProfile } from "../../lib/hooks/useProfile";
@@ -15,7 +16,7 @@ const ProfilePage = () => {
   return (
     <Fragment>
       <Grid2 container>
-        <Grid2 size={12}>
+        <Grid2 xs={12}>
           <ProfileHeader />
           <ProfileContent />
         </Grid2>

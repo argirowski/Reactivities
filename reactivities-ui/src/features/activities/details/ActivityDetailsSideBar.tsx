@@ -1,7 +1,6 @@
 import {
   Avatar,
   Chip,
-  Grid2,
   List,
   ListItem,
   ListItemAvatar,
@@ -9,6 +8,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -35,7 +35,7 @@ const ActivityDetailsSideBar = ({ activity }: ActivityDetailsSideBarProps) => {
       <Paper sx={{ padding: 2 }}>
         {activity.attendees.map((attendee) => (
           <Grid2 key={attendee.id} container alignItems="center">
-            <Grid2 size={8}>
+            <Grid2 xs={8}>
               <List sx={{ display: "flex", flexDirection: "column" }}>
                 <ListItem component={Link} to={`/profiles/${attendee.id}`}>
                   <ListItemAvatar>
@@ -58,7 +58,7 @@ const ActivityDetailsSideBar = ({ activity }: ActivityDetailsSideBarProps) => {
               </List>
             </Grid2>
             <Grid2
-              size={4}
+              xs={4}
               sx={{
                 display: "flex",
                 flexDirection: "column",

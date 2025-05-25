@@ -1,5 +1,6 @@
 import { CalendarToday, Info, Place } from "@mui/icons-material";
-import { Box, Button, Divider, Grid2, Paper, Typography } from "@mui/material";
+import { Box, Button, Divider, Paper, Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment, useState } from "react";
 import { formattedDate } from "../../../lib/utils/utils";
 import MapComponent from "../../../app/shared/components/MapComponent";
@@ -14,30 +15,30 @@ const ActivityDetailsInfo = ({ activity }: ActivityDetailsInfoProps) => {
     <Fragment>
       <Paper sx={{ mb: 2 }}>
         <Grid2 container alignItems="center" pl={2} py={1}>
-          <Grid2 size={1}>
+          <Grid2 xs={1}>
             <Info color="info" fontSize="large" />
           </Grid2>
-          <Grid2 size={11}>
+          <Grid2 xs={11}>
             <Typography>{activity.description}</Typography>
           </Grid2>
         </Grid2>
         <Divider />
         <Grid2 container alignItems="center" pl={2} py={1}>
-          <Grid2 size={1}>
+          <Grid2 xs={1}>
             <CalendarToday color="info" fontSize="large" />
           </Grid2>
-          <Grid2 size={11}>
+          <Grid2 xs={11}>
             <Typography> {formattedDate(activity.date)}</Typography>
           </Grid2>
         </Grid2>
         <Divider />
 
         <Grid2 container alignItems="center" pl={2} py={1}>
-          <Grid2 size={1}>
+          <Grid2 xs={1}>
             <Place color="info" fontSize="large" />
           </Grid2>
           <Grid2
-            size={11}
+            xs={11}
             display="flex"
             justifyContent="space-between"
             alignItems="center"

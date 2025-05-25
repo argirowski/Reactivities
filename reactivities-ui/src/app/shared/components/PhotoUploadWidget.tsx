@@ -1,5 +1,6 @@
 import { CloudUpload } from "@mui/icons-material";
-import { Box, Button, Grid2, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Cropper, { ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
@@ -44,7 +45,7 @@ const PhotoUploadWidget = ({
   return (
     <Fragment>
       <Grid2 container spacing={3}>
-        <Grid2 size={4}>
+        <Grid2 xs={4}>
           <Typography variant="overline" color="secondary">
             Step 1 - Add photo
           </Typography>
@@ -64,7 +65,7 @@ const PhotoUploadWidget = ({
             <Typography variant="h5">Drop image here</Typography>
           </Box>
         </Grid2>
-        <Grid2 size={4}>
+        <Grid2 xs={4}>
           <Typography variant="overline" color="secondary">
             Step 2 - Resize image
           </Typography>
@@ -82,7 +83,7 @@ const PhotoUploadWidget = ({
             />
           )}
         </Grid2>
-        <Grid2 size={4}>
+        <Grid2 xs={4}>
           {files[0]?.preview && (
             <>
               <Typography variant="overline" color="secondary">

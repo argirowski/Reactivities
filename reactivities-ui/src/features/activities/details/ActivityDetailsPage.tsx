@@ -1,4 +1,5 @@
-import { Grid2, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useActivities } from "../../../lib/hooks/useActivities";
@@ -18,12 +19,12 @@ const ActivityDetailsPage = () => {
   return (
     <Fragment>
       <Grid2 container spacing={3}>
-        <Grid2 size={8}>
+        <Grid2 xs={8}>
           <ActivityDetailsHeader activity={activity} />
           <ActivityDetailsInfo activity={activity} />
           <ActivityDetailsChat />
         </Grid2>
-        <Grid2 size={4}>
+        <Grid2 xs={4}>
           <ActivityDetailsSideBar activity={activity} />
         </Grid2>
       </Grid2>

@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CircularProgress,
+  InputAdornment,
   TextField,
   Typography,
 } from "@mui/material";
@@ -65,12 +66,12 @@ const ActivityDetailsChat = () => {
                 rows={2}
                 placeholder="Enter your comment (Enter to submit, SHIFT + Enter for new line)"
                 onKeyDown={handleKeyPress}
-                slotProps={{
-                  input: {
-                    endAdornment: isSubmitting ? (
+                InputProps={{
+                  endAdornment: isSubmitting ? (
+                    <InputAdornment position="end">
                       <CircularProgress size={24} />
-                    ) : null,
-                  },
+                    </InputAdornment>
+                  ) : null,
                 }}
               />
             </form>

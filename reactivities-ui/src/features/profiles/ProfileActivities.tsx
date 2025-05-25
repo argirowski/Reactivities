@@ -3,7 +3,6 @@ import { useProfile } from "../../lib/hooks/useProfile";
 import { Link, useParams } from "react-router-dom";
 import {
   Box,
-  Grid2,
   Tabs,
   Tab,
   Typography,
@@ -11,6 +10,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2";
 import { format } from "date-fns";
 
 const ProfileActivities = () => {
@@ -36,7 +36,7 @@ const ProfileActivities = () => {
     <Fragment>
       <Box>
         <Grid2 container spacing={2}>
-          <Grid2 size={12}>
+          <Grid2 xs={12}>
             <Tabs value={activeTab} onChange={handleTabChange}>
               {tabs.map((tab, index) => (
                 <Tab label={tab.menuItem} key={index} />
@@ -55,7 +55,7 @@ const ProfileActivities = () => {
         >
           {userActivities &&
             userActivities.map((activity: Activity) => (
-              <Grid2 size={2} key={activity.id}>
+              <Grid2 xs={2} key={activity.id}>
                 <Link
                   to={`/activities/${activity.id}`}
                   style={{ textDecoration: "none" }}

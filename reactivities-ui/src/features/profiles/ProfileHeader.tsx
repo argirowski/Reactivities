@@ -1,6 +1,5 @@
 import {
   Paper,
-  Grid2,
   Stack,
   Avatar,
   Box,
@@ -9,6 +8,7 @@ import {
   Divider,
   Button,
 } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useProfile } from "../../lib/hooks/useProfile";
@@ -23,7 +23,7 @@ const ProfileHeader = () => {
     <Fragment>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 3 }}>
         <Grid2 container spacing={2}>
-          <Grid2 size={8}>
+          <Grid2 xs={8}>
             <Stack direction="row" spacing={3} alignItems="center">
               <Avatar
                 src={profile.imageUrl}
@@ -43,7 +43,7 @@ const ProfileHeader = () => {
               </Box>
             </Stack>
           </Grid2>
-          <Grid2 size={4}>
+          <Grid2 xs={4}>
             <Stack spacing={2} alignItems="center">
               <Box display="flex" justifyContent="space-around" width="100%">
                 <Box textAlign="center">
