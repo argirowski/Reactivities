@@ -98,20 +98,20 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult> RegisterUser(RegisterDTO registerDto)
+        public async Task<ActionResult> RegisterUser(RegisterDTO registerDTO)
         {
             var user = new User
             {
-                UserName = registerDto.Email,
-                Email = registerDto.Email,
-                DisplayName = registerDto.DisplayName
+                UserName = registerDTO.Email,
+                Email = registerDTO.Email,
+                DisplayName = registerDTO.DisplayName
             };
 
-            var result = await signInManager.UserManager.CreateAsync(user, registerDto.Password);
+            var result = await signInManager.UserManager.CreateAsync(user, registerDTO.Password);
 
             if (result.Succeeded)
             {
-                await SendConfirmationEmailAsync(user, registerDto.Email);
+                await SendConfirmationEmailAsync(user, registerDTO.Email);
 
                 return Ok();
             }

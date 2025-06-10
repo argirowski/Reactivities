@@ -15,7 +15,7 @@ namespace API.Middleware
             }
             catch (ValidationException ex)
             {
-                await HandleValitionException(context, ex);
+                await HandleValidationException(context, ex);
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace API.Middleware
             await context.Response.WriteAsync(json);
         }
 
-        private static async Task HandleValitionException(HttpContext context, ValidationException ex)
+        private static async Task HandleValidationException(HttpContext context, ValidationException ex)
         {
             var validationErrors = new Dictionary<string, string[]>();
             if (ex.Errors != null)
